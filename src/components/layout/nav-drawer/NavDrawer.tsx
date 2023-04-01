@@ -13,32 +13,37 @@ import {
   ListItemText,
   useTheme,
   useMediaQuery,
+  ListItemIcon,
+  Icon,
 } from "@mui/material";
-
-type Props = {};
+import { LocationSearch } from "../navbar/locationSearch";
 
 type NavItem = {
   label: string;
   route: string;
+  icon: string;
 };
-const drawerWidth = 200;
+const drawerWidth = 300;
 
 const navItems: NavItem[] = [
   {
     label: "Daily Forcast",
     route: "",
+    icon: 'home'
   },
   {
     label: "Marine Forcast",
     route: "/marine",
+    icon: 'sailing'
   },
   {
     label: "Historical Data",
     route: "/historical",
+    icon: 'query_stats'
   },
 ];
 
-const NavDrawer = (props: Props) => {
+const NavDrawer = () => {
   const menuOpened = useSelector(selectMenuOpen);
   const dispatch = useDispatch();
 
@@ -48,10 +53,12 @@ const NavDrawer = (props: Props) => {
   const drawer = (
     <>
       <Toolbar />
-      <Box sx={{ overflow: "auto" }}>
+      <Box sx={{ overflow: "auto", p: 2 }}>
+        <LocationSearch />
         <List>
           {navItems.map((navItem) => (
-            <ListItemButton>
+            <ListItemButton key={navItem.label}>
+              <ListItemIcon><Icon color="secondary">{navItem.icon}</Icon></ListItemIcon>
               <ListItemText primary={navItem.label} />
             </ListItemButton>
           ))}
@@ -65,10 +72,14 @@ const NavDrawer = (props: Props) => {
       variant="permanent"
       sx={{
         width: drawerWidth,
+        maxWidth: "100%",
         flexShrink: 0,
         [`& .MuiDrawer-paper`]: {
           width: drawerWidth,
+          maxWidth: "100%",
           boxSizing: "border-box",
+          bgcolor: "primary.main",
+          border: 2,
           display: { xs: "none", sm: "block" },
         },
       }}
@@ -86,8 +97,14 @@ const NavDrawer = (props: Props) => {
         keepMounted: true, // Better open performance on mobile.
       }}
       sx={{
-        display: { xs: "block", sm: "none" },
-        "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+        display: { sm: "block", md: "none" },
+        maxWidth: "100%",
+        "& .MuiDrawer-paper": {
+          boxSizing: "border-box",
+          width: drawerWidth,
+          borderRight: 2,
+          bgcolor: "primary.main",
+        },
       }}
     >
       {drawer}

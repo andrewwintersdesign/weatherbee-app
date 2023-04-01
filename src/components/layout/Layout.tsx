@@ -9,7 +9,7 @@ type Props = {
 
 const Layout = (props: Props) => {
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", bgcolor: 'primary.main' }}>
       <Navbar />
       <NavDrawer />
       <Box component="main" sx={{ flexGrow: 1, height: "100vh" }}>

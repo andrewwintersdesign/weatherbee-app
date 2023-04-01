@@ -1,17 +1,18 @@
+import './Navbar.css';
 import AppBar from "@mui/material/AppBar";
-import { Box, Icon, IconButton, InputAdornment, TextField, Toolbar, Typography } from "@mui/material";
+import { Box, Icon, IconButton, Toolbar, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { toggle } from "../../../state/mobileMenu/mobileMenuSlice";
-type Props = {};
 
-const Navbar = (props: Props) => {
+const Navbar = () => {
   const dispatch = useDispatch();
   return (
     <AppBar
       position="fixed"
-      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      elevation={0}
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, borderBottom: 2 }}
     >
-      <Toolbar sx={{p: 1}}>
+      <Toolbar>
         <IconButton
           color="inherit"
           aria-label="open drawer"
@@ -21,22 +22,33 @@ const Navbar = (props: Props) => {
         >
           <Icon>menu</Icon>
         </IconButton>
-        <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, justifyContent: 'space-between'}}>
+
+        <Box
+          component="a"
+          href="/"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1
+          }}
+        >
+          <Box component="i" className="logo" sx={{
+            width: {
+              xs: 42,
+              sm: 56,
+              md: 56,
+              lg: 56
+            },
+            height: {
+              xs: 36,
+              sm: 48,
+              md: 48,
+              lg: 48
+            }
+          }}></Box>
           <Typography variant="h6" color="inherit" component="div">
             weatherbee
           </Typography>
-          <TextField
-            id="outlined-basic"
-            label="Search Location"
-            variant="outlined"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <Icon>search</Icon>
-                </InputAdornment>
-              ),
-            }}
-          />
         </Box>
       </Toolbar>
     </AppBar>
