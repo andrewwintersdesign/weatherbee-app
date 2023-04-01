@@ -59,7 +59,7 @@ const NavDrawer = () => {
           {navItems.map((navItem) => (
             <ListItemButton key={navItem.label}>
               <ListItemIcon><Icon color="secondary">{navItem.icon}</Icon></ListItemIcon>
-              <ListItemText primary={navItem.label} />
+              <ListItemText primaryTypographyProps={{ variant: 'button' }} primary={navItem.label} />
             </ListItemButton>
           ))}
         </List>

@@ -33,18 +33,8 @@ const Navbar = () => {
           }}
         >
           <Box component="i" className="logo" sx={{
-            width: {
-              xs: 42,
-              sm: 56,
-              md: 56,
-              lg: 56
-            },
-            height: {
-              xs: 36,
-              sm: 48,
-              md: 48,
-              lg: 48
-            }
+            width: 42,
+            height: 36
           }}></Box>
           <Typography variant="h6" color="inherit" component="div">
             weatherbee
