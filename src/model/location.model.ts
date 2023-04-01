@@ -22,14 +22,31 @@ export type LocationDTO = {
 };
 
 export type Location = {
-    id: number;
-    name: string;
-    latitude: number;
-    longitude: number;
-    elevation: number;
-    feature_code: string;
-    country_code: string;
-    timezone: string;
-    population: number;
-    country: string;
-  };
+  id: number;
+  name: string;
+  latitude: number;
+  longitude: number;
+  elevation: number;
+  feature_code: string;
+  country_code: string;
+  timezone: string;
+  population: number;
+  country: string;
+};
+
+export type ReverseGeoCode = {
+  city: string;
+  continent: string;
+  continentCode: string;
+  countryCode: string;
+  countryName: string;
+  latitude: number;
+  locality: string;
+  localityInfo: { administrative: any[]; informative: any[] };
+  localityLanguageRequested: string;
+  longitude: number;
+  plusCode: string;
+  postcode: string;
+  principalSubdivision: string;
+  principalSubdivisionCode: string;
+};
