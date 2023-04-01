@@ -41,7 +41,7 @@ export const locationSlice = createSlice({
       })
       .addCase(getLocations.fulfilled, (state, action) => {
         state.status = 'succeeded'
-        state.locations = state.locations = action.payload ? action.payload : [];
+        state.locations = action.payload ? action.payload : [];
       })
       .addCase(getLocations.rejected, (state, action) => {
         state.status = 'failed'

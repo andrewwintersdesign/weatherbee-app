@@ -7,7 +7,7 @@ import {
   selectLocations,
   selectCurrentLocation,
   setCurrentLocation,
-} from "./../../../../state/loaction/locationSlice";
+} from "../../../../state/location/locationSlice";
 import { Location } from "../../../../model";
 import { SyntheticEvent } from "react";
 import React from "react";

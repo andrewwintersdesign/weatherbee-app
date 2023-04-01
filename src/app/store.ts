@@ -1,6 +1,7 @@
 import { configureStore,  ThunkAction, Action } from '@reduxjs/toolkit';
 import menuReducer from '../state/mobileMenu/mobileMenuSlice';
-import locationReducer from '../state/loaction/locationSlice'
+import locationReducer from '../state/location/locationSlice';
+import dailyForecastReducer from '../state/dailyForecast/dailyForecastSlice'
 
 
 
@@ -8,7 +9,8 @@ import locationReducer from '../state/loaction/locationSlice'
 export const store = configureStore({
   reducer: {
     menu: menuReducer,
-    location: locationReducer
+    location: locationReducer,
+    dailyForecast: dailyForecastReducer
   },
  
 })

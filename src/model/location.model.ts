@@ -34,7 +34,7 @@ export type Location = {
   country: string;
 };
 
-export type ReverseGeoCode = {
+export type ReverseGeocodeDTO = {
   city: string;
   continent: string;
   continentCode: string;

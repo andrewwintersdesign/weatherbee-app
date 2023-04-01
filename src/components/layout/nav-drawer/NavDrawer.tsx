@@ -28,12 +28,12 @@ const drawerWidth = 300;
 
 const navItems: NavItem[] = [
   {
-    label: "Daily Forcast",
+    label: "Daily Forecast",
     route: "/",
     icon: "home",
   },
   {
-    label: "Marine Forcast",
+    label: "Marine Forecast",
     route: "/marine",
     icon: "sailing",
   },

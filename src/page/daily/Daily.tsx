@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrentLocation,
   setCurrentLocation,
-} from "../state/loaction/locationSlice";
-import { Location, ReverseGeoCode } from "../model";
-import { AppDispatch } from "../app/store";
+} from "../../state/location/locationSlice";
+import { Location, ReverseGeocodeDTO } from "../../model";
+import { AppDispatch } from "../../app/store";
+import DailyForecast from "./dailyForecast/DailyForecast";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 type Props = {};
 
@@ -26,7 +28,7 @@ const Daily = (props: Props) => {
       `https://api-bdc.net/data/reverse-geocode?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&key=${process.env.REACT_APP_BIG_DATA_CLOUD_KEY}`
     )
       .then((data) => data.json())
-      .then((data: ReverseGeoCode) => {
+      .then((data: ReverseGeocodeDTO) => {
         const location = {
           id: 0,
           name: data.city || data.locality,
@@ -48,7 +50,14 @@ const Daily = (props: Props) => {
     console.error(error);
   };
 
-  return <div>Daily</div>;
+  return (
+    <Grid2 container spacing={2}>
+      <Grid2 xs={12} md={6} lg={4}>
+        <DailyForecast />
+      </Grid2>
+    </Grid2>
+  );
 };
 
 export default Daily;
+

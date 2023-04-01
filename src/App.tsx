@@ -3,9 +3,7 @@ import { Layout } from "./components/layout";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
   BrowserRouter,
-  createBrowserRouter,
   Route,
-  RouterProvider,
   Routes,
 } from "react-router-dom";
 import { Daily, Historical, Marine } from "./page";
