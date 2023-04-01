@@ -28,7 +28,7 @@ const drawerWidth = 300;
 const navItems: NavItem[] = [
   {
     label: "Daily Forcast",
-    route: "",
+    route: "/",
     icon: 'home'
   },
   {
@@ -57,7 +57,7 @@ const NavDrawer = () => {
         <LocationSearch />
         <List>
           {navItems.map((navItem) => (
-            <ListItemButton key={navItem.label}>
+            <ListItemButton key={navItem.label} href={navItem.route}>
               <ListItemIcon><Icon color="secondary">{navItem.icon}</Icon></ListItemIcon>
               <ListItemText primaryTypographyProps={{ variant: 'button' }} primary={navItem.label} />
             </ListItemButton>

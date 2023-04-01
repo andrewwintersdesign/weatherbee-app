@@ -2,6 +2,12 @@
 import './App.css';
 import { Layout } from './components/layout';
 import { createTheme, ThemeProvider } from '@mui/material';
+import ReactDOM from "react-dom/client";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import { Daily, Historical, Marine } from './page';
 
 const extraBold = 800;
 const bold = 700;
@@ -74,9 +80,23 @@ const theme = createTheme({
 })
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Daily />,
+    },
+    {
+      path: "/marine",
+      element: <Marine />,
+    },
+    {
+      path: "/historical",
+      element: <Historical />,
+    },
+  ]);
   return (
     <ThemeProvider theme={theme}>
-   <Layout>Hello!</Layout>
+   <Layout><RouterProvider router={router} /></Layout>
    </ThemeProvider>
   );
 }
