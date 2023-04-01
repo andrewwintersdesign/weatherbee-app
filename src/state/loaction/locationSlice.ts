@@ -1,13 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { Location } from "../../model";
+import { FetchStatus, Location } from "../../model";
 import { fetchLocations } from "./locationAPI";
 
 export interface LocationState {
   currentLocation?: Location;
   locations: Location[];
-
-  status: "idle" | "loading" | "succeeded" | "failed";
+  status: FetchStatus;
   error: string | null;
 }
 
@@ -32,7 +31,7 @@ export const locationSlice = createSlice({
   initialState,
   reducers: {
     setCurrentLocation: (state, action) => {
-        state.currentLocation = action.payload;
+        state.currentLocation = action.payload ;
       },
   },
   extraReducers(builder) {
@@ -42,7 +41,7 @@ export const locationSlice = createSlice({
       })
       .addCase(getLocations.fulfilled, (state, action) => {
         state.status = 'succeeded'
-        state.locations = state.locations = action.payload 
+        state.locations = state.locations = action.payload ? action.payload : [];
       })
       .addCase(getLocations.rejected, (state, action) => {
         state.status = 'failed'

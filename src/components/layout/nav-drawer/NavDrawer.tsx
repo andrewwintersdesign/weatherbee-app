@@ -17,6 +17,7 @@ import {
   Icon,
 } from "@mui/material";
 import { LocationSearch } from "../navbar/locationSearch";
+import { Link } from "react-router-dom";
 
 type NavItem = {
   label: string;
@@ -29,17 +30,17 @@ const navItems: NavItem[] = [
   {
     label: "Daily Forcast",
     route: "/",
-    icon: 'home'
+    icon: "home",
   },
   {
     label: "Marine Forcast",
     route: "/marine",
-    icon: 'sailing'
+    icon: "sailing",
   },
   {
     label: "Historical Data",
     route: "/historical",
-    icon: 'query_stats'
+    icon: "query_stats",
   },
 ];
 
@@ -57,9 +58,18 @@ const NavDrawer = () => {
         <LocationSearch />
         <List>
           {navItems.map((navItem) => (
-            <ListItemButton key={navItem.label} href={navItem.route}>
-              <ListItemIcon><Icon color="secondary">{navItem.icon}</Icon></ListItemIcon>
-              <ListItemText primaryTypographyProps={{ variant: 'button' }} primary={navItem.label} />
+            <ListItemButton
+              key={navItem.label}
+              component={Link} 
+              to={navItem.route}
+            >
+              <ListItemIcon>
+                <Icon color="secondary">{navItem.icon}</Icon>
+              </ListItemIcon>
+              <ListItemText
+                primaryTypographyProps={{ variant: "button" }}
+                primary={navItem.label}
+              />
             </ListItemButton>
           ))}
         </List>

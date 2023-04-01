@@ -1,13 +1,14 @@
-
-import './App.css';
-import { Layout } from './components/layout';
-import { createTheme, ThemeProvider } from '@mui/material';
-import ReactDOM from "react-dom/client";
+import "./App.css";
+import { Layout } from "./components/layout";
+import { createTheme, ThemeProvider } from "@mui/material";
 import {
+  BrowserRouter,
   createBrowserRouter,
+  Route,
   RouterProvider,
+  Routes,
 } from "react-router-dom";
-import { Daily, Historical, Marine } from './page';
+import { Daily, Historical, Marine } from "./page";
 
 const extraBold = 800;
 const bold = 700;
@@ -17,26 +18,26 @@ const regular = 400;
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#FFD500',
-      contrastText: "000000"
+      main: "#FFD500",
+      contrastText: "000000",
     },
     secondary: {
-      main: '#000000',
-    }
+      main: "#000000",
+    },
   },
   typography: {
     fontFamily: [
-      'Noto Sans',
-      '-apple-system',
-      'BlinkMacSystemFont',
+      "Noto Sans",
+      "-apple-system",
+      "BlinkMacSystemFont",
       '"Segoe UI"',
       '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
+      "Arial",
+      "sans-serif",
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
-    ].join(','),
+    ].join(","),
     h1: {
       fontWeight: extraBold,
     },
@@ -69,18 +70,16 @@ const theme = createTheme({
     },
     button: {
       fontWeight: bold,
-      textTransform: 'none'
+      textTransform: "none",
     },
-    caption:{
-      fontWeight: bold
-    }
-    
-    
+    caption: {
+      fontWeight: bold,
+    },
   },
-})
+});
 
 function App() {
-  const router = createBrowserRouter([
+  const routes = [
     {
       path: "/",
       element: <Daily />,
@@ -93,11 +92,19 @@ function App() {
       path: "/historical",
       element: <Historical />,
     },
-  ]);
+  ];
   return (
     <ThemeProvider theme={theme}>
-   <Layout><RouterProvider router={router} /></Layout>
-   </ThemeProvider>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            {routes.map((route) => (
+              <Route key={route.path} path={route.path} element={route.element}/>
+            ))}
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
