@@ -17,7 +17,7 @@ const Daily = (props: Props) => {
   );
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    document.title = `Daily Forcast`;
+    document.title = `Daily Forecast`;
     if (!currentLocation) {
       navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
     }

@@ -67,7 +67,6 @@ const LocationSearch = () => {
         <TextField
           {...params}
           label="Search Locations"
-          size="small"
           InputProps={{
             ...params.InputProps,
             endAdornment: (

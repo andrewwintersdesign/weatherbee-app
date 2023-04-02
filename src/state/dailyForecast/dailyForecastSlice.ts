@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { CurrentConditions, FetchStatus } from "../../model";
+import { CurrentConditions, FetchStatus, WEATHER_CODES } from "../../model";
 import { fetchCurrentConditions } from "./dailyForecastAPI";
 
 export interface DailyForecastState {
@@ -20,7 +20,7 @@ export const getCurrentConditions = createAsyncThunk(
   async (data: { latitude: number; longitude: number}) => {
     const response = await fetchCurrentConditions(data.latitude, data.longitude);
 
-    return response.results;
+    return {...response.current_weather, weatherCode: WEATHER_CODES[response.current_weather.weathercode]};
   }
 );
 

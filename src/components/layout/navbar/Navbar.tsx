@@ -3,6 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import { Box, Icon, IconButton, Toolbar, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { toggle } from "../../../state/mobileMenu/mobileMenuSlice";
+import { ReactComponent as Logo } from '../../../assets/logo';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -32,10 +33,10 @@ const Navbar = () => {
             gap: 1
           }}
         >
-          <Box component="i" className="logo" sx={{
+          <Box component="i"  sx={{
             width: 42,
             height: 36
-          }}></Box>
+          }}> <Logo className="logo"/></Box>
           <Typography variant="h6" color="inherit" component="div">
             weatherbee
           </Typography>
