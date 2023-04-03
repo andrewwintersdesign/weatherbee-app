@@ -55,11 +55,12 @@ const theme = createTheme({
       fontWeight: extraBold,
     },
     subtitle1: {
-      fontSize: '2.125rem',
+      fontSize: '1.5rem',
       fontWeight: medium,
     },
     subtitle2: {
-      fontSize: '1.25rem',
+      fontSize: '1.125rem',
+      lineHeight: 1.5,
       fontWeight: medium,
     },
     body1: {

@@ -1,4 +1,4 @@
-import { Autocomplete, CircularProgress, Icon, TextField } from "@mui/material";
+import { Autocomplete, AutocompleteRenderInputParams, CircularProgress, Icon, TextField } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../app/store";
 import {
@@ -56,15 +56,14 @@ const LocationSearch = () => {
         if (location) {
           dispatch(setCurrentLocation(location));
           dispatch(close());
-        } else {
-          console.error("Location not found");
-        }
+        } 
       }}
       onInputChange={(event, newInputValue) => {
         fetchLocations(newInputValue);
       }}
-      renderInput={(params) => (
+      renderInput={(params: AutocompleteRenderInputParams) => (
         <TextField
+        key={params.id}
           {...params}
           label="Search Locations"
           InputProps={{

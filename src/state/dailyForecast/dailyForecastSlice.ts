@@ -4,13 +4,25 @@ import { CurrentConditions, FetchStatus, WEATHER_CODES } from "../../model";
 import { fetchCurrentConditions } from "./dailyForecastAPI";
 
 export interface DailyForecastState {
-  currentConditions: CurrentConditions | undefined;
+  currentConditions: CurrentConditions;
   status: FetchStatus;
   error: string | null;
 }
 
 const initialState: DailyForecastState = {
-  currentConditions: undefined,
+  currentConditions: {
+    temperature: 0,
+    apparentTemperature: 0,
+    time: new Date().toISOString(),
+    weatherCode: {
+      image: "",
+      summary: "",
+    },
+    windDirection: 0,
+    windSpeed: 0,
+    precipitation: 0,
+    precipitationProbability: 0,
+  },
   status: "idle",
   error: null,
 };
@@ -25,15 +37,18 @@ export const getCurrentConditions = createAsyncThunk(
       data.latitude,
       data.longitude
     );
-    const currentHour = new Date().getHours();
+    const currentHour = new Date().getUTCHours();
     const currentConditions: CurrentConditions = {
       temperature: response.current_weather.temperature,
       time: response.current_weather.time,
-      winddirection: response.current_weather.winddirection,
+      windDirection: response.current_weather.winddirection,
       windSpeed: response.current_weather.windspeed,
       weatherCode: WEATHER_CODES[response.current_weather.weathercode],
       apparentTemperature: response.hourly.apparent_temperature[currentHour],
-    } 
+      precipitation: response.hourly.precipitation[currentHour],
+      precipitationProbability:
+        response.hourly.precipitation_probability[currentHour],
+    };
 
     return currentConditions;
   }
@@ -50,12 +65,13 @@ export const dailyForecastSlice = createSlice({
       })
       .addCase(
         getCurrentConditions.fulfilled,
-        (state: DailyForecastState, action: PayloadAction<CurrentConditions>) => {
-        
-          state.status = "succeeded"
-          state.currentConditions = action.payload  ? action.payload : undefined;
+        (
+          state: DailyForecastState,
+          action: PayloadAction<CurrentConditions>
+        ) => {
+          state.status = "succeeded";
+          state.currentConditions = action.payload;
         }
-        
       )
       .addCase(getCurrentConditions.rejected, (state, action) => {
         state.status = "failed";
@@ -68,5 +84,8 @@ export const {} = dailyForecastSlice.actions;
 
 export const selectCurrentConditions = (state: RootState) =>
   state.dailyForecast.currentConditions;
+
+export const selectCurrentConditionsStatus = (state: RootState) =>
+  state.dailyForecast.status;
 
 export default dailyForecastSlice.reducer;

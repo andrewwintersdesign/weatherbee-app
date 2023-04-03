@@ -89,7 +89,7 @@ const NavDrawer = () => {
           maxWidth: "100%",
           boxSizing: "border-box",
           bgcolor: "primary.main",
-          border: 2,
+          borderRight: 2,
           display: { xs: "none", sm: "block" },
         },
       }}
