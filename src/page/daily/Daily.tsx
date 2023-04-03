@@ -36,10 +36,10 @@ const Daily = (props: Props) => {
           longitude: position.coords.longitude,
           elevation: position.coords.altitude || 0,
           feature_code: "",
-          country_code: "",
+          country_code: data.countryCode,
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           population: 0,
-          country: "",
+          country: data.countryName,
         };
         dispatch(setCurrentLocation(location));
       })

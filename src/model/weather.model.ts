@@ -1,9 +1,36 @@
+
+export type WeatherForecastDTO = {
+  current_weather: CurrentConditionsDTO ;
+  daily: DailyForecast;
+  elevation: number;
+  hourly: HourlyForecast;
+};
+export type CurrentConditionsDTO = {
+  temperature: number;
+  apparentTemperature: number;
+  time: string;
+  weathercode: number;
+  winddirection: number;
+  windspeed: number;
+};
 export type CurrentConditions = {
   temperature: number;
+  apparentTemperature: number;
   time: string;
   weatherCode: WeatherCode;
   winddirection: number;
-  windspeed: number;
+  windSpeed: number;
+};
+
+export type Forecast = { time: string[];  };
+
+export type DailyForecast = Forecast & {
+  sunrise: string[]; sunset: string[]
+};
+
+export type HourlyForecast = Forecast & {
+  temperature_2m: number[];
+  apparent_temperature: number[];
 };
 
 // WMO Weather interpretation codes

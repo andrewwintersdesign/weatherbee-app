@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { CurrentConditions, FetchStatus, WEATHER_CODES } from "../../model";
 import { fetchCurrentConditions } from "./dailyForecastAPI";
@@ -17,10 +17,25 @@ const initialState: DailyForecastState = {
 
 export const getCurrentConditions = createAsyncThunk(
   "dailyForecast/getCurrentConditions",
-  async (data: { latitude: number; longitude: number}) => {
-    const response = await fetchCurrentConditions(data.latitude, data.longitude);
+  async (data: {
+    latitude: number;
+    longitude: number;
+  }): Promise<CurrentConditions> => {
+    const response = await fetchCurrentConditions(
+      data.latitude,
+      data.longitude
+    );
+    const currentHour = new Date().getHours();
+    const currentConditions: CurrentConditions = {
+      temperature: response.current_weather.temperature,
+      time: response.current_weather.time,
+      winddirection: response.current_weather.winddirection,
+      windSpeed: response.current_weather.windspeed,
+      weatherCode: WEATHER_CODES[response.current_weather.weathercode],
+      apparentTemperature: response.hourly.apparent_temperature[currentHour],
+    } 
 
-    return {...response.current_weather, weatherCode: WEATHER_CODES[response.current_weather.weathercode]};
+    return currentConditions;
   }
 );
 
@@ -33,10 +48,15 @@ export const dailyForecastSlice = createSlice({
       .addCase(getCurrentConditions.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(getCurrentConditions.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.currentConditions = action.payload ? action.payload : [];
-      })
+      .addCase(
+        getCurrentConditions.fulfilled,
+        (state: DailyForecastState, action: PayloadAction<CurrentConditions>) => {
+        
+          state.status = "succeeded"
+          state.currentConditions = action.payload  ? action.payload : undefined;
+        }
+        
+      )
       .addCase(getCurrentConditions.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message || null;
