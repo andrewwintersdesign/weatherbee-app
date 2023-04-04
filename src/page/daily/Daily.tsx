@@ -54,8 +54,8 @@ const Daily = (props: Props) => {
     const location: Location = {
       id: -1,
       name: 'No Loction Selected',
-      latitude:  -1,
-      longitude: -1,
+      latitude:  0,
+      longitude: 0,
       elevation:  0,
       feature_code: "",
       country_code: 'n',

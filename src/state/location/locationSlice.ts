@@ -13,7 +13,7 @@ export interface LocationState {
 const initialState: LocationState = {
   currentLocation: {
       id: -1,
-      name: '',
+      name: 'No Loction Selected',
       latitude: 0,
       longitude: 0,
       elevation:  0,
