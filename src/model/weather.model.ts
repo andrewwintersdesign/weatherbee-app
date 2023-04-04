@@ -5,6 +5,8 @@ export type WeatherForecastDTO = {
   daily: DailyForecast;
   elevation: number;
   hourly: HourlyForecast;
+  timezone: string,
+  utc_offset_seconds: number
 };
 export type CurrentConditionsDTO = {
   temperature: number;
@@ -80,79 +82,79 @@ export const WEATHER_CODES: WeatherCodes = {
     summary: "Heavy Drizzle",
   },
   56: {
-    image: "",
+    image: "lightFreezingDrizle",
     summary: "Light Freezing Drizzle",
   },
   57: {
-    image: "",
+    image: "heavyFreezingDrizzle",
     summary: "Heavy Freezing Drizzle",
   },
   61: {
-    image: "",
+    image: "lightRain",
     summary: "Light Rain",
   },
   63: {
-    image: "",
+    image: "moderateRain",
     summary: "Rain",
   },
   65: {
-    image: "",
+    image: "heavyRain",
     summary: "Heavy Rain",
   },
   66: {
-    image: "",
+    image: "lightFreezingRain",
     summary: "light Freezing Rain",
   },
   67: {
-    image: "",
+    image: "heavyFreezingRain",
     summary: "Heavy Freezing Rain",
   },
   71: {
-    image: "",
+    image: "lightSnow",
     summary: "Light Snow",
   },
   73: {
-    image: "",
-    summary: "Moderate snow",
+    image: "moderateSnow",
+    summary: "Snow",
   },
   75: {
-    image: "",
+    image: "heavySnow",
     summary: "Heavy Snow",
   },
   77: {
-    image: "",
+    image: "moderateSnow",
     summary: "Snow Grains",
   },
   80: {
-    image: "",
+    image: "lightRain",
     summary: "Light Rain Showers",
   },
   81: {
-    image: "",
+    image: "moderateRain",
     summary: "Moderate Rain Showers",
   },
   82: {
-    image: "",
+    image: "heavyRain",
     summary: "Heavy Rain Showers",
   },
   85: {
-    image: "",
+    image: "lightSnow",
     summary: "Light Snow Showers",
   },
   86: {
-    image: "",
+    image: "heavySnow",
     summary: "Heavy Snow Showers",
   },
   95: {
-    image: "",
+    image: "thunderstorms",
     summary: "Thunderstorms",
   },
   96: {
-    image: "",
+    image: "thunderstormLightHail",
     summary: "Thunderstorms with Light Hail",
   },
   99: {
-    image: "",
+    image: "thunderstormHeavyHail",
     summary: "Thunderstorms with Heavy Hail",
   },
 };

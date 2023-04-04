@@ -22,8 +22,8 @@ const initialState: DailyForecastState = {
     windSpeed: 0,
     precipitation: 0,
     precipitationProbability: 0,
-    sunrise: "",
-    sunset: "",
+    sunrise: new Date(0).toISOString(),
+    sunset: new Date(0).toISOString(),
   },
   status: "idle",
   error: null,
@@ -39,7 +39,7 @@ export const getCurrentConditions = createAsyncThunk(
       data.latitude,
       data.longitude
     );
-    const currentHour = new Date().getUTCHours();
+    const currentHour = new Date().getUTCHours() + Math.round(response.utc_offset_seconds / 3600);
     const currentConditions: CurrentConditions = {
       temperature: response.current_weather.temperature,
       time: response.current_weather.time,

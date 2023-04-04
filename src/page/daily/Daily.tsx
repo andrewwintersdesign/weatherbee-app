@@ -32,9 +32,10 @@ const Daily = (props: Props) => {
     )
       .then((data) => data.json())
       .then((data: ReverseGeocodeDTO) => {
+        debugger;
         const location = {
           id: 0,
-          name: data.city || data.locality,
+          name: data.localityInfo?.administrative[data.localityInfo.administrative.length -1].name || data.city || data.locality,
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
           elevation: position.coords.altitude || 0,
