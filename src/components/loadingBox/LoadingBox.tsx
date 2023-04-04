@@ -17,9 +17,9 @@ const LoadingBox = (props: Props) => {
     
   return (
     <>
-    {props.loading ? <Box className="shimmer"  sx={{width: props.width, height: props.height,
+    {props.loading ? <Box sx={{width: (props.width * 0.75), height: props.height, display: 'flex', alignItems: 'center'}}><Box className="shimmer"  sx={{width: '100%', height: '75%', 
         background: `linear-gradient(to right, #000000 8%, ${primary} 18%, #000000 33%)`, opacity: props.opacity, borderRadius: borderRadius,
-        backgroundSize: '800px 104px' }} />
+        backgroundSize: '800px 104px' }} /></Box>
         : props.children}
         </>
   )

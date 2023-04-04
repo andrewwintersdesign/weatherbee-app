@@ -8,6 +8,7 @@ import { Location, ReverseGeocodeDTO } from "../../model";
 import { AppDispatch } from "../../app/store";
 import DailyForecast from "./dailyForecast/DailyForecast";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { setStatus } from "../../state/dailyForecast/dailyForecastSlice";
 
 type Props = {};
 
@@ -25,7 +26,7 @@ const Daily = (props: Props) => {
 
 
   const successCallback = (position: GeolocationPosition) => {
-  
+    dispatch(setStatus('loading'))
     fetch(
       `https://api-bdc.net/data/reverse-geocode?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&key=${process.env.REACT_APP_BIG_DATA_CLOUD_KEY}`
     )

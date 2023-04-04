@@ -16,7 +16,7 @@ const PrecipSummary = () => {
 
   const currentConditionsStatus = useSelector(selectCurrentConditionsStatus);
 
-  const loading: boolean =
+  const loading: boolean = 
     currentConditionsStatus === "loading";
   return (
     <>
@@ -28,7 +28,7 @@ const PrecipSummary = () => {
           alignItems: "center",
         }}
       >
-        <Box
+        <LoadingBox height={96} width={96} opacity={0.1} loading={loading}><Box
           sx={{
             width: 72,
             height: 96,
@@ -50,10 +50,10 @@ const PrecipSummary = () => {
               backgroundPosition: "bottom",
               marginBottom: "4px",
             }}
-          ></Box>
+          />
         </Box>
-      
-          <LoadingBox height={72} width={100} opacity={0.2} loading={loading}> <Typography variant="h2" component="span">
+        </LoadingBox>
+          <LoadingBox height={72} width={120} opacity={0.2} loading={loading}> <Typography variant="h2" component="span">
           {currentConditions.precipitationProbability.toFixed(0)}%
         </Typography></LoadingBox>
        

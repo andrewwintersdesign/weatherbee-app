@@ -15,7 +15,7 @@ const DaylightSummary = () => {
     
       const currentConditionsStatus = useSelector(selectCurrentConditionsStatus);
     
-      const loading: boolean =
+      const loading: boolean = 
         currentConditionsStatus === "loading";
   return (
     <Box
@@ -27,11 +27,19 @@ const DaylightSummary = () => {
         }}
       >
       
-            <LoadingBox height={27} width={100} opacity={0.1} loading={loading}> <Typography variant="subtitle2">
-              {`Sunrise: ${new Date(currentConditions.sunrise).toLocaleTimeString('en', { hour: "2-digit", minute: "2-digit" })}`}
+      <LoadingBox height={27} width={200} opacity={0.1} loading={loading}> 
+             <Typography variant="subtitle2" component="span" sx={{display: 'flex', alignItems: 'center'}}>
+            Sunrise:&nbsp;
+            <Typography variant="h6">
+              {`${new Date(currentConditions.sunrise).toLocaleTimeString('en', { hour: "2-digit", minute: "2-digit" })}`}
+              </Typography>
             </Typography></LoadingBox>
-            <LoadingBox height={27} width={200} opacity={0.1} loading={loading}>  <Typography variant="subtitle2" component="div">
-            {`Sunset: ${new Date(currentConditions.sunset).toLocaleTimeString('en', { hour: "2-digit", minute: "2-digit" })}`}
+            <LoadingBox height={27} width={200} opacity={0.1} loading={loading}> 
+             <Typography variant="subtitle2" component="span" sx={{display: 'flex', alignItems: 'center'}}>
+            Sunset:&nbsp;
+            <Typography variant="h6">
+              {`${new Date(currentConditions.sunset).toLocaleTimeString('en', { hour: "2-digit", minute: "2-digit" })}`}
+              </Typography>
             </Typography></LoadingBox>
       
            

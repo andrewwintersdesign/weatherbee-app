@@ -20,7 +20,7 @@ const WindSummary = () => {
 
   const currentConditionsStatus = useSelector(selectCurrentConditionsStatus);
 
-  const loading: boolean =
+  const loading: boolean = 
     currentConditionsStatus === "loading" ;
   return (
     <>
@@ -33,7 +33,7 @@ const WindSummary = () => {
         }}
       >
       
-          <LoadingBox height={72} width={100} opacity={0.2} loading={loading}><Typography variant="h2" component="span">
+          <LoadingBox height={72} width={150} opacity={0.2} loading={loading}><Typography variant="h2" component="span">
           {currentConditions?.windSpeed.toFixed(0)}
           <Typography variant="subtitle1" component="span">
             km/h
@@ -50,7 +50,9 @@ const WindSummary = () => {
             justifyContent: "center",
           }}
         >
+          <LoadingBox height={72} width={72} opacity={0.2} loading={loading}>
           <WindDirectionIcon />
+          </LoadingBox>
         </Box>
       </Box>
       <Box

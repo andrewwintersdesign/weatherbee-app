@@ -21,7 +21,7 @@ const CurrentConditionsSummary = (props: Props) => {
 
   const currentConditionsStatus = useSelector(selectCurrentConditionsStatus);
 
-  const loading: boolean =
+  const loading: boolean = 
     currentConditionsStatus === "loading" ;
 
   const h6Height = 32;
@@ -39,10 +39,10 @@ const CurrentConditionsSummary = (props: Props) => {
         }}
       >
        
-            <LoadingBox height={h6Height} width={200} opacity={0.2} loading={loading}> <Typography variant="h6">
+            <LoadingBox height={h6Height} width={250} opacity={0.2} loading={loading}> <Typography variant="h6">
               {currentLocation?.name}{currentLocation?.country && `, ${currentLocation.country}`}
             </Typography></LoadingBox>
-            <LoadingBox height={h6Height} width={100} opacity={0.2} loading={loading}> <Typography variant="h6" sx={{ whiteSpace: "nowrap" }}>
+            <LoadingBox height={h6Height} width={120} opacity={0.2} loading={loading}> <Typography variant="h6" sx={{ whiteSpace: "nowrap" }}>
               {new Date().toLocaleTimeString("en", {
                 timeStyle: "short",
                 timeZone: currentLocation?.timezone,
@@ -64,7 +64,7 @@ const CurrentConditionsSummary = (props: Props) => {
               size={"large"}
               iconName={currentConditions.weatherCode.image}
             /></LoadingBox>
-            <LoadingBox height={h2Height} width={130} opacity={0.2} loading={loading}> <Typography variant="h2" component="div" >
+            <LoadingBox height={h2Height} width={150} opacity={0.2} loading={loading}> <Typography variant="h2" component="div" >
               {currentConditions?.temperature.toFixed(0)}°C
             </Typography></LoadingBox>
    
@@ -78,10 +78,10 @@ const CurrentConditionsSummary = (props: Props) => {
         }}
       >
         
-            <LoadingBox height={subtitle2Height} width={100} opacity={0.1} loading={loading}>    <Typography variant="subtitle2" style={{minWidth: 96, textAlign: 'center'}}>
+            <LoadingBox height={subtitle2Height} width={150} opacity={0.1} loading={loading}>    <Typography variant="subtitle2" style={{minWidth: 96, textAlign: 'center'}}>
               {currentConditions?.weatherCode.summary}
             </Typography></LoadingBox>
-            <LoadingBox height={subtitle2Height} width={100} opacity={0.1} loading={loading}> <Typography variant="subtitle2" component="div">
+            <LoadingBox height={subtitle2Height} width={150} opacity={0.1} loading={loading}> <Typography variant="subtitle2" component="div">
               Feels like {currentConditions?.apparentTemperature.toFixed(0)}°C
             </Typography></LoadingBox>
       
