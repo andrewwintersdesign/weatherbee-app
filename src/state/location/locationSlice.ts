@@ -4,14 +4,26 @@ import { FetchStatus, Location } from "../../model";
 import { fetchLocations } from "./locationAPI";
 
 export interface LocationState {
-  currentLocation?: Location;
+  currentLocation: Location;
   locations: Location[];
   status: FetchStatus;
   error: string | null;
 }
 
 const initialState: LocationState = {
-  currentLocation: undefined,
+  currentLocation: {
+      id: -1,
+      name: '',
+      latitude: 0,
+      longitude: 0,
+      elevation:  0,
+      feature_code: "",
+      country_code: '',
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      population: 0,
+      country: '',
+    
+  },
   locations: [],
   status: "idle",
   error: null,
@@ -33,6 +45,9 @@ export const locationSlice = createSlice({
     setCurrentLocation: (state, action) => {
         state.currentLocation = action.payload ;
       },
+      clearLocations: (state) => {
+        state.locations = [] ;
+      },
   },
   extraReducers(builder) {
     builder
@@ -50,7 +65,7 @@ export const locationSlice = createSlice({
   }
 });
 
-export const { setCurrentLocation } = locationSlice.actions;
+export const { setCurrentLocation, clearLocations } = locationSlice.actions;
 
 export const selectLocations = (state: RootState) => state.location.locations;
 export const selectLocationStatus = (state: RootState) => state.location.status;

@@ -16,7 +16,7 @@ import {
   ListItemIcon,
   Icon,
 } from "@mui/material";
-import { LocationSearch } from "../navbar/locationSearch";
+import { LocationSearch } from "../../locationSearch";
 import { Link } from "react-router-dom";
 
 type NavItem = {
@@ -49,7 +49,7 @@ const NavDrawer = () => {
   const dispatch = useDispatch();
 
   const theme = useTheme();
-  const largeScreen = useMediaQuery(theme.breakpoints.up("md"));
+  const largeScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
   const drawer = (
     <>
@@ -90,7 +90,6 @@ const NavDrawer = () => {
           boxSizing: "border-box",
           bgcolor: "primary.main",
           borderRight: 2,
-          display: { xs: "none", sm: "block" },
         },
       }}
     >
@@ -107,7 +106,6 @@ const NavDrawer = () => {
         keepMounted: true, // Better open performance on mobile.
       }}
       sx={{
-        display: { sm: "block", md: "none" },
         maxWidth: "100%",
         "& .MuiDrawer-paper": {
           boxSizing: "border-box",

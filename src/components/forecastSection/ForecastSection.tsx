@@ -9,7 +9,7 @@ type Props = {
 
 const ForecastSection = (props: Props) => {
   return (
-    <Stack spacing={2}>
+    <Stack spacing={1}>
         <Box sx={{ borderBottom: 1 }}>
           <Typography variant={props.headerComponent || 'subtitle1'} sx={{ fontWeght: "400" }}>
             {props.header}

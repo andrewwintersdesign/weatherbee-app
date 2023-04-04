@@ -10,15 +10,17 @@ import { ForecastSection } from "../../../components/forecastSection";
 import { CurrentConditionsSummary } from "./currentConditionsSummary";
 import { WindSummary } from "./windSummary";
 import { PrecipSummary } from "./precipSummary";
+import { DaylightSummary } from "./daylightSummary";
 
 const DailyForecast = () => {
   const dispatch = useDispatch<AppDispatch>();
   const currentLocation: Location | undefined = useSelector(
     selectCurrentLocation
   );
+  
 
   useEffect(() => {
-    if (currentLocation) {
+    if (currentLocation && currentLocation.id !== -1) {
       dispatch(
         getCurrentConditions({
           latitude: currentLocation?.latitude,
@@ -28,7 +30,13 @@ const DailyForecast = () => {
     }
   }, [currentLocation, dispatch]);
   return (
-    <Stack spacing={3}>
+    <Stack
+      spacing={2}
+      sx={{
+        justifyContent: "space-between",
+        minHeight: { xs: "calc(100vh - 88px)", sm: "calc(100vh - 96px)" },
+      }}
+    >
       <ForecastSection header="Current Conditions" headerComponent="h4">
         <CurrentConditionsSummary />
       </ForecastSection>
@@ -37,6 +45,9 @@ const DailyForecast = () => {
       </ForecastSection>
       <ForecastSection header="Precipitation">
         <PrecipSummary />
+      </ForecastSection>
+      <ForecastSection header="Sunrise & Sunset">
+        <DaylightSummary />
       </ForecastSection>
     </Stack>
   );

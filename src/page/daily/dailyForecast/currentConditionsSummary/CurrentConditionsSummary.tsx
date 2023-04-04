@@ -22,7 +22,7 @@ const CurrentConditionsSummary = (props: Props) => {
   const currentConditionsStatus = useSelector(selectCurrentConditionsStatus);
 
   const loading: boolean =
-    currentConditionsStatus === "loading" || currentConditionsStatus === "idle";
+    currentConditionsStatus === "loading" ;
 
   const h6Height = 32;
   const h2Height = 72;
@@ -38,24 +38,17 @@ const CurrentConditionsSummary = (props: Props) => {
           alignItems: "center",
         }}
       >
-        {loading ? (
-          <>
-            <LoadingBox height={h6Height} width={200} opacity={0.2} />
-            <LoadingBox height={h6Height} width={100} opacity={0.2} />
-          </>
-        ) : (
-          <>
-            <Typography variant="h6">
-              {currentLocation?.name}, {currentLocation?.country}{" "}
-            </Typography>
-            <Typography variant="h6" sx={{ whiteSpace: "nowrap" }}>
+       
+            <LoadingBox height={h6Height} width={200} opacity={0.2} loading={loading}> <Typography variant="h6">
+              {currentLocation?.name}{currentLocation?.country && `, ${currentLocation.country}`}
+            </Typography></LoadingBox>
+            <LoadingBox height={h6Height} width={100} opacity={0.2} loading={loading}> <Typography variant="h6" sx={{ whiteSpace: "nowrap" }}>
               {new Date().toLocaleTimeString("en", {
                 timeStyle: "short",
                 timeZone: currentLocation?.timezone,
               })}{" "}
-            </Typography>
-          </>
-        )}
+            </Typography></LoadingBox>
+    
       </Box>
 
       <Box
@@ -66,22 +59,15 @@ const CurrentConditionsSummary = (props: Props) => {
           alignItems: "center",
         }}
       >
-        {loading ? (
-          <>
-            <LoadingBox height={96} width={96} opacity={0.2} />
-            <LoadingBox height={h2Height} width={130} opacity={0.2} />
-          </>
-        ) : (
-          <>
-            <WeatherIcon
+      
+            <LoadingBox height={96} width={96} opacity={0.2} loading={loading}> <WeatherIcon
               size={"large"}
               iconName={currentConditions.weatherCode.image}
-            />
-            <Typography variant="h2" component="div">
+            /></LoadingBox>
+            <LoadingBox height={h2Height} width={130} opacity={0.2} loading={loading}> <Typography variant="h2" component="div" >
               {currentConditions?.temperature.toFixed(0)}°C
-            </Typography>
-          </>
-        )}
+            </Typography></LoadingBox>
+   
       </Box>
       <Box
         sx={{
@@ -91,21 +77,14 @@ const CurrentConditionsSummary = (props: Props) => {
           alignItems: "center",
         }}
       >
-        {loading ? (
-          <>
-            <LoadingBox height={subtitle2Height} width={100} opacity={0.1} />
-            <LoadingBox height={subtitle2Height} width={100} opacity={0.1} />
-          </>
-        ) : (
-          <>
-            <Typography variant="subtitle2">
+        
+            <LoadingBox height={subtitle2Height} width={100} opacity={0.1} loading={loading}>    <Typography variant="subtitle2" style={{minWidth: 96, textAlign: 'center'}}>
               {currentConditions?.weatherCode.summary}
-            </Typography>
-            <Typography variant="subtitle2" component="div">
+            </Typography></LoadingBox>
+            <LoadingBox height={subtitle2Height} width={100} opacity={0.1} loading={loading}> <Typography variant="subtitle2" component="div">
               Feels like {currentConditions?.apparentTemperature.toFixed(0)}°C
-            </Typography>
-          </>
-        )}
+            </Typography></LoadingBox>
+      
       </Box>
     </>
   );

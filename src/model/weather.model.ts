@@ -23,6 +23,8 @@ export type CurrentConditions = {
   windSpeed: number;
   precipitation: number;
   precipitationProbability: number;
+  sunrise: string;
+  sunset: string;
 };
 
 export type Forecast = { time: string[] };

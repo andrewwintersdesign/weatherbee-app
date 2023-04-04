@@ -21,7 +21,7 @@ const WindSummary = () => {
   const currentConditionsStatus = useSelector(selectCurrentConditionsStatus);
 
   const loading: boolean =
-    currentConditionsStatus === "loading" || currentConditionsStatus === "idle";
+    currentConditionsStatus === "loading" ;
   return (
     <>
       <Box
@@ -32,16 +32,14 @@ const WindSummary = () => {
           alignItems: "center",
         }}
       >
-        {loading ? (
-          <LoadingBox height={72} width={100} opacity={0.2} />
-        ) : (
-          <Typography variant="h2" component="span">
-            {currentConditions?.windSpeed.toFixed(0)}
-            <Typography variant="subtitle1" component="span">
-              km/h
-            </Typography>
+      
+          <LoadingBox height={72} width={100} opacity={0.2} loading={loading}><Typography variant="h2" component="span">
+          {currentConditions?.windSpeed.toFixed(0)}
+          <Typography variant="subtitle1" component="span">
+            km/h
           </Typography>
-        )}
+        </Typography></LoadingBox>
+     
 
         <Box
           sx={{
@@ -63,22 +61,15 @@ const WindSummary = () => {
           alignItems: "center",
         }}
       >
-        {loading ? (
-          <>
-            <LoadingBox height={27} width={150} opacity={0.1} />
-            <LoadingBox height={27} width={200} opacity={0.1} />
-          </>
-        ) : (
-          <>
-            {" "}
-            <Typography variant="subtitle2">
+      
+            <LoadingBox height={27} width={150} opacity={0.1} loading={loading}> <Typography variant="subtitle2">
               {windStrength(currentConditions.windSpeed)}
-            </Typography>
-            <Typography variant="subtitle2" component="div">
+            </Typography></LoadingBox>
+            <LoadingBox height={27} width={200} opacity={0.1} loading={loading}> <Typography variant="subtitle2" component="div">
               {windDirection(currentConditions.windDirection)}
-            </Typography>
-          </>
-        )}
+            </Typography></LoadingBox>
+
+       
       </Box>
     </>
   );

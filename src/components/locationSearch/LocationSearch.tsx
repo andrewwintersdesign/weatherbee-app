@@ -1,17 +1,24 @@
-import { Autocomplete, AutocompleteRenderInputParams, CircularProgress, Icon, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  AutocompleteRenderInputParams,
+  CircularProgress,
+  Icon,
+  TextField,
+} from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { AppDispatch } from "../../../../app/store";
+import { AppDispatch } from "../../app/store";
 import {
   selectLocationStatus,
   getLocations,
   selectLocations,
   selectCurrentLocation,
   setCurrentLocation,
-} from "../../../../state/location/locationSlice";
-import { Location } from "../../../../model";
+  clearLocations,
+} from "../../state/location/locationSlice";
+import { Location } from "../../model";
 import { SyntheticEvent } from "react";
 import React from "react";
-import { close } from "../../../../state/mobileMenu/mobileMenuSlice";
+import { close } from "../../state/mobileMenu/mobileMenuSlice";
 
 const LocationSearch = () => {
   const [value] = React.useState<Location | undefined>(
@@ -26,6 +33,7 @@ const LocationSearch = () => {
 
   const fetchLocations = (searchString: string | null) => {
     clearTimeout(debounceTimeout);
+    dispatch(clearLocations());
     debounceTimeout = setTimeout(() => {
       if (searchString && searchString.length > 1)
         dispatch(getLocations(searchString));
@@ -56,14 +64,13 @@ const LocationSearch = () => {
         if (location) {
           dispatch(setCurrentLocation(location));
           dispatch(close());
-        } 
+        }
       }}
       onInputChange={(event, newInputValue) => {
         fetchLocations(newInputValue);
       }}
       renderInput={(params: AutocompleteRenderInputParams) => (
         <TextField
-        key={params.id}
           {...params}
           label="Search Locations"
           InputProps={{
@@ -81,6 +88,17 @@ const LocationSearch = () => {
           }}
         />
       )}
+      renderOption={(props, location: Location) => {
+        return (
+          <li {...props} key={location.id}>
+            {typeof location === "string"
+              ? location
+              : location.country
+              ? `${location.name}, ${location.country}`
+              : `${location.name}`}
+          </li>
+        );
+      }}
     />
   );
 };

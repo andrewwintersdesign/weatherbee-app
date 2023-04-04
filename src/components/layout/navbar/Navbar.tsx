@@ -19,7 +19,7 @@ const Navbar = () => {
           aria-label="open drawer"
           edge="start"
           onClick={() => dispatch(toggle())}
-          sx={{ mr: 2, display: { md: "none" } }}
+          sx={{ mr: 2, display: { lg: "none" } }}
         >
           <Icon>menu</Icon>
         </IconButton>

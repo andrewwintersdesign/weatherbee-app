@@ -16,6 +16,7 @@ import { ReactComponent as FogLarge } from "./icons/fog/fog-96.svg";
 import { ReactComponent as FogSmall } from "./icons/fog/fog-48.svg";
 import { FunctionComponent } from "react";
 import { Icon, IconTypes } from "../../model";
+import { Box } from "@mui/material";
 
 type Props = {
   iconName: Icon;
@@ -54,7 +55,8 @@ const iconTypes: {large: IconTypes, small: IconTypes} = {
 
 const WeatherIcon = (props: Props) => {
   const Icon: FunctionComponent = iconTypes[props.size][props.iconName];
-  return <Icon />;
+  const size = props.size === 'large' ? 96 : 48
+  return <Box sx={{width: size, height:size}}><Icon /></Box>;
 };
 
 export default WeatherIcon;

@@ -18,12 +18,14 @@ const Daily = (props: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     document.title = `Daily Forecast`;
-    if (!currentLocation) {
+    if (currentLocation.id === -1) {
       navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
     }
   });
 
+
   const successCallback = (position: GeolocationPosition) => {
+  
     fetch(
       `https://api-bdc.net/data/reverse-geocode?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&key=${process.env.REACT_APP_BIG_DATA_CLOUD_KEY}`
     )
@@ -47,14 +49,27 @@ const Daily = (props: Props) => {
   };
 
   const errorCallback = (error: GeolocationPositionError) => {
-    console.error(error);
+    const location: Location = {
+      id: -1,
+      name: 'No Loction Selected',
+      latitude:  -1,
+      longitude: -1,
+      elevation:  0,
+      feature_code: "",
+      country_code: 'n',
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      population: 0,
+      country: '',
+    };
+    dispatch(setCurrentLocation(location));
   };
 
   return (
-    <Grid2 container spacing={2}>
-      <Grid2 xs={12} md={6} lg={4}>
+    <Grid2 container spacing={2} columns={{ xs: 4, sm: 8, lg: 12 }} sx={{minHeight: '100%'}}>
+      <Grid2 xs={4}>
         <DailyForecast />
       </Grid2>
+      <Grid2 xs={4} lg={8}></Grid2>
     </Grid2>
   );
 };

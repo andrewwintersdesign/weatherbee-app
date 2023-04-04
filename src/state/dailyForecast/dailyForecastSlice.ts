@@ -22,6 +22,8 @@ const initialState: DailyForecastState = {
     windSpeed: 0,
     precipitation: 0,
     precipitationProbability: 0,
+    sunrise: '',
+    sunset: '',
   },
   status: "idle",
   error: null,
@@ -48,6 +50,8 @@ export const getCurrentConditions = createAsyncThunk(
       precipitation: response.hourly.precipitation[currentHour],
       precipitationProbability:
         response.hourly.precipitation_probability[currentHour],
+        sunrise: response.daily.sunrise[0],
+        sunset: response.daily.sunset[0]
     };
 
     return currentConditions;
@@ -79,8 +83,6 @@ export const dailyForecastSlice = createSlice({
       });
   },
 });
-
-export const {} = dailyForecastSlice.actions;
 
 export const selectCurrentConditions = (state: RootState) =>
   state.dailyForecast.currentConditions;

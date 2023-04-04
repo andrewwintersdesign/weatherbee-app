@@ -17,7 +17,7 @@ const PrecipSummary = () => {
   const currentConditionsStatus = useSelector(selectCurrentConditionsStatus);
 
   const loading: boolean =
-    currentConditionsStatus === "loading" || currentConditionsStatus === "idle";
+    currentConditionsStatus === "loading";
   return (
     <>
       <Box
@@ -52,13 +52,11 @@ const PrecipSummary = () => {
             }}
           ></Box>
         </Box>
-        {loading ? (
-          <LoadingBox height={72} width={100} opacity={0.2} />
-        ) : (
-          <Typography variant="h2" component="span">
-            {currentConditions.precipitationProbability.toFixed(0)}%
-          </Typography>
-        )}
+      
+          <LoadingBox height={72} width={100} opacity={0.2} loading={loading}> <Typography variant="h2" component="span">
+          {currentConditions.precipitationProbability.toFixed(0)}%
+        </Typography></LoadingBox>
+       
       </Box>
       <Box
         sx={{
@@ -68,21 +66,14 @@ const PrecipSummary = () => {
           alignItems: "center",
         }}
       >
-        {loading ? (
-          <>
-            <LoadingBox height={27} width={100} opacity={0.1} />
-            <LoadingBox height={27} width={200} opacity={0.1} />
-          </>
-        ) : (
-          <>
-            <Typography variant="subtitle2">
+       
+            <LoadingBox height={27} width={100} opacity={0.1} loading={loading}><Typography variant="subtitle2" sx={{minWidth: 72, textAlign: 'center'}}>
               {currentConditions.precipitation}mm
-            </Typography>
-            <Typography variant="subtitle2" component="div">
+            </Typography></LoadingBox>
+            <LoadingBox height={27} width={200} opacity={0.1} loading={loading}> <Typography variant="subtitle2" component="div">
               Chance of precipitation
-            </Typography>
-          </>
-        )}
+            </Typography></LoadingBox>
+      
       </Box>
     </>
   );

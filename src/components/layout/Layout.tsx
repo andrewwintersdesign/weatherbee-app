@@ -14,7 +14,7 @@ const Layout = (props: Props) => {
       <NavDrawer />
       <Box component="main" sx={{ flexGrow: 1, height: "100vh" }}>
         <Toolbar />
-        <Box sx={{ p: 2 }}>{props.children}</Box>
+        <Box sx={{ p: 2}}>{props.children}</Box>
       </Box>
     </Box>
   );
