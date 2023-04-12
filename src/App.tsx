@@ -6,7 +6,7 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import { Daily, Historical, Marine } from "./page";
+import { Weather, Historical, Marine } from "./page";
 
 const extraBold = 800;
 const bold = 700;
@@ -83,7 +83,7 @@ function App() {
   const routes = [
     {
       path: "/",
-      element: <Daily />,
+      element: <Weather />,
     },
     {
       path: "/marine",

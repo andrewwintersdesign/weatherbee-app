@@ -109,7 +109,7 @@ const iconTypes: {large: IconTypes, small: IconTypes} = {
 const WeatherIcon = (props: Props) => {
   const Icon: FunctionComponent = iconTypes[props.size][props.iconName];
   const size = props.size === 'large' ? 96 : 48
-  return <Box sx={{width: size, height:size}}><Icon /></Box>;
+  return <Box data-testid='icon' sx={{width: size, height:size}}><Icon /></Box>;
 };
 
 export default WeatherIcon;

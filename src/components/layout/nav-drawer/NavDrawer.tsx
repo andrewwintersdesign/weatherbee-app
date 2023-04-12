@@ -28,7 +28,7 @@ const drawerWidth = 300;
 
 const navItems: NavItem[] = [
   {
-    label: "Daily Forecast",
+    label: "Weather Forecast",
     route: "/",
     icon: "home",
   },

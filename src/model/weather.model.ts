@@ -2,11 +2,11 @@ import { Icon } from "./icon.model";
 
 export type WeatherForecastDTO = {
   current_weather: CurrentConditionsDTO;
-  daily: DailyForecast;
+  daily: DailyForecastDTO;
   elevation: number;
-  hourly: HourlyForecast;
-  timezone: string,
-  utc_offset_seconds: number
+  hourly: HourlyForecastDTO;
+  timezone: string;
+  utc_offset_seconds: number;
 };
 export type CurrentConditionsDTO = {
   temperature: number;
@@ -16,11 +16,7 @@ export type CurrentConditionsDTO = {
   winddirection: number;
   windspeed: number;
 };
-export type CurrentConditions = {
-  temperature: number;
-  apparentTemperature: number;
-  time: string;
-  weatherCode: WeatherCode;
+export type Conditions = {
   windDirection: number;
   windSpeed: number;
   precipitation: number;
@@ -28,15 +24,46 @@ export type CurrentConditions = {
   sunrise: string;
   sunset: string;
 };
-
-export type Forecast = { time: string[] };
-
-export type DailyForecast = Forecast & {
-  sunrise: string[];
-  sunset: string[];
+export type CurrentConditions = Conditions & {
+  weatherCode: WeatherCode;
+  temperature: number;
+  apparentTemperature: number;
+  time: string;
 };
 
-export type HourlyForecast = Forecast & {
+export type SevenDayForecast = Conditions & {
+  weatherCode: WeatherCode;
+  date: Date;
+  day: string;
+  high: number;
+  low: number;
+};
+
+export type TwoDayForecast = Conditions & {
+  date: Date;
+  day: string;
+  weatherCodes: WeatherCode[];
+  high: number;
+  low: number;
+};
+
+export type Forecast = {
+  time: string[];
+  weathercode: number[];
+  windspeed_10m_max: number[];
+  winddirection_10m_dominant: number[];
+};
+
+export type DailyForecastDTO = Forecast & {
+  sunrise: string[];
+  sunset: string[];
+  temperature_2m_max: number[];
+  temperature_2m_min: number[];
+  precipitation_sum: number[];
+  precipitation_probability_max: number[];
+};
+
+export type HourlyForecastDTO = Forecast & {
   temperature_2m: number[];
   apparent_temperature: number[];
   precipitation: number[];
@@ -241,32 +268,34 @@ export const windDirection: (heading: number) => CardinalWindDirection = (
   }
 };
 
-export const windStrength: (windSpeed: number) => BeaufortWindStrength = (windSpeed: number) =>{
-  if(windSpeed < 1){
-    return "Calm"
-  } else if(windSpeed < 6){
-    return "Light Air"
-  } else if(windSpeed < 12){
-    return "Light Breeze"
-  } else if (windSpeed < 20){
-    return "Gentle Breeze"
-  } else if(windSpeed < 29){
-    return "Moderate Breeze"
-  } else if(windSpeed < 38){
-return "Fresh Breeze"
-  } else if (windSpeed < 50){
-    return "Strong Breeze"
-  } else if (windSpeed < 62){
-    return "Near Gale"
-  } else if (windSpeed < 75){
-    return "Gale"
-  } else if(windSpeed < 89){
-    return "Strong Gale"
-  } else if(windSpeed < 103){
-    return "Storm"
-  } else if(windSpeed < 118){
-    return "Violent Storm"
+export const windStrength: (windSpeed: number) => BeaufortWindStrength = (
+  windSpeed: number
+) => {
+  if (windSpeed < 1) {
+    return "Calm";
+  } else if (windSpeed < 6) {
+    return "Light Air";
+  } else if (windSpeed < 12) {
+    return "Light Breeze";
+  } else if (windSpeed < 20) {
+    return "Gentle Breeze";
+  } else if (windSpeed < 29) {
+    return "Moderate Breeze";
+  } else if (windSpeed < 38) {
+    return "Fresh Breeze";
+  } else if (windSpeed < 50) {
+    return "Strong Breeze";
+  } else if (windSpeed < 62) {
+    return "Near Gale";
+  } else if (windSpeed < 75) {
+    return "Gale";
+  } else if (windSpeed < 89) {
+    return "Strong Gale";
+  } else if (windSpeed < 103) {
+    return "Storm";
+  } else if (windSpeed < 118) {
+    return "Violent Storm";
   } else {
-    return "Hurricane"
+    return "Hurricane";
   }
-}
+};
