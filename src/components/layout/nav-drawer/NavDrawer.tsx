@@ -103,7 +103,7 @@ const NavDrawer = () => {
       open={menuOpened}
       onClose={() => dispatch(close())}
       ModalProps={{
-        keepMounted: true, // Better open performance on mobile.
+        keepMounted: true
       }}
       sx={{
         maxWidth: "100%",

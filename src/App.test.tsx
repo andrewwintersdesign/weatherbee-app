@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import App from './App';
 
-test('maths', () => {
+it('maths', () => {
   // const {  = render(
   //   <Provider store={store}>
   //     <App />
