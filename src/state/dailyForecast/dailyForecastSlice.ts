@@ -7,7 +7,7 @@ import {
   TwoDayForecast,
   WEATHER_CODES,
 } from "../../model";
-import { fetchCurrentConditions } from "./dailyForecastAPI";
+import { fetchWeatherForecast } from "./dailyForecastAPI";
 
 export interface DailyForecastState {
   currentConditions: CurrentConditions;
@@ -39,8 +39,8 @@ const initialState: DailyForecastState = {
   error: null,
 };
 
-export const getCurrentConditions = createAsyncThunk(
-  "dailyForecast/getCurrentConditions",
+export const getWeatherForecast = createAsyncThunk(
+  "dailyForecast/getWeatherForecast",
   async (data: {
     latitude: number;
     longitude: number;
@@ -49,7 +49,7 @@ export const getCurrentConditions = createAsyncThunk(
     sevenDayForecast: SevenDayForecast[];
     twoDayForecast: TwoDayForecast[];
   }> => {
-    const response = await fetchCurrentConditions(
+    const response = await fetchWeatherForecast(
       data.latitude,
       data.longitude
     );
@@ -82,7 +82,7 @@ export const getCurrentConditions = createAsyncThunk(
           precipitationProbability: daily.precipitation_probability_max[index],
           sunrise: daily.sunrise[index],
           sunset: daily.sunset[index],
-          date: date,
+          date: dateString,
           day: date.toLocaleString("en-us", { weekday: "short" }),
           high: daily.temperature_2m_max[index],
           low: daily.temperature_2m_min[index],
@@ -100,7 +100,7 @@ export const getCurrentConditions = createAsyncThunk(
           weathercodeStartIndex + 18,
         ]
         return {
-          date: date,
+          date: dateString,
           day: date.toLocaleString("en-us", { weekday: "short" }),
           weatherCodes: weatherCodesIndices.map(index => {
           
@@ -117,7 +117,6 @@ export const getCurrentConditions = createAsyncThunk(
         };
       }
     );
-    debugger;
     return {
       currentConditions: currentConditions,
       sevenDayForecast: sevenDayForecast,
@@ -137,13 +136,13 @@ export const dailyForecastSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(
-        getCurrentConditions.pending,
+        getWeatherForecast.pending,
         (state: DailyForecastState, action) => {
           state.status = action.payload || "idle";
         }
       )
       .addCase(
-        getCurrentConditions.fulfilled,
+        getWeatherForecast.fulfilled,
         (
           state: DailyForecastState,
           action: PayloadAction<{
@@ -158,7 +157,7 @@ export const dailyForecastSlice = createSlice({
           state.twoDayForecast = action.payload.twoDayForecast;
         }
       )
-      .addCase(getCurrentConditions.rejected, (state, action) => {
+      .addCase(getWeatherForecast.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message || null;
       });
@@ -167,6 +166,10 @@ export const dailyForecastSlice = createSlice({
 export const { setStatus } = dailyForecastSlice.actions;
 export const selectCurrentConditions = (state: RootState) =>
   state.dailyForecast.currentConditions;
+  export const selectSevenDayForecast = (state: RootState) =>
+  state.dailyForecast.sevenDayForecast;
+  export const selectTwoDayForecast = (state: RootState) =>
+  state.dailyForecast.twoDayForecast;
 
 export const selectCurrentConditionsStatus = (state: RootState) =>
   state.dailyForecast.status;

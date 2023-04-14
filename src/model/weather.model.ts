@@ -33,14 +33,14 @@ export type CurrentConditions = Conditions & {
 
 export type SevenDayForecast = Conditions & {
   weatherCode: WeatherCode;
-  date: Date;
+  date: string;
   day: string;
   high: number;
   low: number;
 };
 
 export type TwoDayForecast = Conditions & {
-  date: Date;
+  date: string;
   day: string;
   weatherCodes: WeatherCode[];
   high: number;

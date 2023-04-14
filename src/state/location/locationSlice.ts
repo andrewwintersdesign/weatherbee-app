@@ -70,4 +70,5 @@ export const { setCurrentLocation, clearLocations } = locationSlice.actions;
 export const selectLocations = (state: RootState) => state.location.locations;
 export const selectLocationStatus = (state: RootState) => state.location.status;
 export const selectCurrentLocation = (state: RootState) => state.location.currentLocation;
+
 export default locationSlice.reducer;
