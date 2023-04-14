@@ -22,8 +22,8 @@ const Weather = () => {
     selectCurrentLocation
   );
   const dispatch = useDispatch<AppDispatch>();
+  
   useEffect(() => {
-    console.log('render')
     document.title = `weatherbee`;
     if (currentLocation.id === -1) {
       navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
