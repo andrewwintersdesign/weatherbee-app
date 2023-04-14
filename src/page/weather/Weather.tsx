@@ -91,7 +91,7 @@ const Weather = () => {
           }}
         >
           <SevenDayForecastComponent />
-          <TwoDayForecast />
+          {/* <TwoDayForecast /> */}
         </Stack>
       </Grid>
     </Grid>
