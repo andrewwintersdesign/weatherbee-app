@@ -2,11 +2,19 @@ import { ForecastSection } from "../../../components/forecastSection";
 import { Stack } from "@mui/material";
 import { SevenDayForecast } from "../../../model";
 import { useSelector } from "react-redux";
-import { selectSevenDayForecast } from "../../../state/dailyForecast/dailyForecastSlice";
+import {
+  selectCurrentConditionsStatus,
+  selectSevenDayForecast,
+} from "../../../state/dailyForecast/dailyForecastSlice";
 import DayForecast from "./dayForecast/DayForecast";
+import { LoadingBox } from "../../../components/loadingBox";
 
 const SevenDayForecastComponent = () => {
   const forecast: SevenDayForecast[] = useSelector(selectSevenDayForecast);
+  const currentConditionsStatus = useSelector(selectCurrentConditionsStatus);
+
+  const loading: boolean = currentConditionsStatus === "loading";
+
   return (
     <Stack
       spacing={2}
@@ -19,11 +27,23 @@ const SevenDayForecastComponent = () => {
         <Stack
           direction={"row"}
           spacing={1}
-          sx={{ flexGrow: 1, justifyContent: "space-between" }}
+          sx={{ flexGrow: 1, justifyContent: "space-between", overflowX: 'scroll' }}
         >
-          {forecast.map((forecast) => (
-            <DayForecast key={forecast.day} forecast={forecast} />
-          ))}
+          {loading
+            ? Array.from({ length: 7 }, (x, index) => (
+                <LoadingBox
+                  key={index}
+                  height={283}
+                  width={100}
+                  opacity={0.2}
+                  loading={true}
+                >
+                  <></>{" "}
+                </LoadingBox>
+              ))
+            : forecast.map((forecast) => (
+                <DayForecast key={forecast.day} forecast={forecast} />
+              ))}
         </Stack>
       </ForecastSection>
     </Stack>

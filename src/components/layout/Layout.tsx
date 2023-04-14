@@ -12,7 +12,7 @@ const Layout = (props: Props) => {
     <Box sx={{ display: "flex", bgcolor: 'primary.main' }}>
       <Navbar />
       <NavDrawer />
-      <Box component="main" sx={{ flexGrow: 1, height: "100vh" }}>
+      <Box component="main" sx={{ flexGrow: 1, height: "100vh", maxWidth: '100vw' }}>
         <Toolbar />
         <Box sx={{ p: 2}}>{props.children}</Box>
       </Box>

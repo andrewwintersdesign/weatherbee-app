@@ -54,7 +54,7 @@ const PrecipSummary = () => {
         </Box>
         </LoadingBox>
           <LoadingBox height={72} width={120} opacity={0.2} loading={loading}> <Typography variant="h2" component="span">
-          {currentConditions.precipitationProbability.toFixed(0)}%
+          {currentConditions?.precipitationProbability?.toFixed(0) || '--'}%
         </Typography></LoadingBox>
        
       </Box>

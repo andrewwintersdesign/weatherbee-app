@@ -34,7 +34,7 @@ const WindSummary = () => {
       >
       
           <LoadingBox height={72} width={150} opacity={0.2} loading={loading}><Typography variant="h2" component="span">
-          {currentConditions?.windSpeed.toFixed(0)}
+          {currentConditions?.windSpeed?.toFixed(0) || '--'}
           <Typography variant="subtitle1" component="span">
             km/h
           </Typography>

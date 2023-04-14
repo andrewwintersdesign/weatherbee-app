@@ -88,7 +88,7 @@ const CurrentConditionsSummary = (props: Props) => {
         >
           {" "}
           <Typography variant="h2" component="div">
-            {currentConditions?.temperature.toFixed(0)}°C
+            {currentConditions?.temperature?.toFixed(0) || '--'}°C
           </Typography>
         </LoadingBox>
       </Box>
@@ -122,7 +122,7 @@ const CurrentConditionsSummary = (props: Props) => {
         >
           {" "}
           <Typography variant="subtitle2" component="div">
-            Feels like {currentConditions?.apparentTemperature.toFixed(0)}°C
+            Feels like {currentConditions?.apparentTemperature?.toFixed(0) || '--'}°C
           </Typography>
         </LoadingBox>
       </Box>

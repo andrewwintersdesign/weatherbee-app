@@ -137,8 +137,8 @@ export const dailyForecastSlice = createSlice({
     builder
       .addCase(
         getWeatherForecast.pending,
-        (state: DailyForecastState, action) => {
-          state.status = action.payload || "idle";
+        (state: DailyForecastState) => {
+          state.status = "loading";
         }
       )
       .addCase(

@@ -75,7 +75,7 @@ const Weather = () => {
   return (
     <Grid
       container
-      spacing={2}
+      spacing={4}
       columns={{ xs: 4, sm: 8, lg: 12 }}
       sx={{ minHeight: "100%" }}
     >
