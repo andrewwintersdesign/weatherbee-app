@@ -5,8 +5,7 @@ import {
   Icon,
   TextField,
 } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { AppDispatch } from "../../app/store";
+import { useSelector} from "react-redux";
 import {
   selectLocationStatus,
   getLocations,
@@ -19,12 +18,13 @@ import { Location } from "../../model";
 import { SyntheticEvent } from "react";
 import React from "react";
 import { close } from "../../state/mobileMenu/mobileMenuSlice";
+import { useAppDispatch } from "../../app/hooks";
 
 const LocationSearch = () => {
   const [value] = React.useState<Location | undefined>(
     useSelector(selectCurrentLocation)
   );
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const locationStatus = useSelector(selectLocationStatus);
   const loading = locationStatus === "loading";
   const locationOptions: Location[] = useSelector(selectLocations);

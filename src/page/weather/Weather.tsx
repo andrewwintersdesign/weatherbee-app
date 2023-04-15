@@ -1,11 +1,10 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   selectCurrentLocation,
   setCurrentLocation,
 } from "../../state/location/locationSlice";
 import { Location } from "../../model";
-import { AppDispatch } from "../../app/store";
 import CurrentConditionsComponent from "./currentConditions/CurrentConditions";
 import {
   getWeatherForecast,
@@ -14,6 +13,7 @@ import {
 import { Stack, Unstable_Grid2 as Grid } from "@mui/material/";
 import SevenDayForecastComponent from "./sevenDayForecast/SevenDayForecast";
 import TwoDayForecast from "./twoDayForecast/TwoDayForecast";
+import { useAppDispatch } from "../../app/hooks";
 
 
 
@@ -21,7 +21,7 @@ const Weather = () => {
   const currentLocation: Location | undefined = useSelector(
     selectCurrentLocation
   );
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   
   useEffect(() => {
     document.title = `weatherbee`;
