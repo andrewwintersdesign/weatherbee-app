@@ -20,14 +20,14 @@ const SevenDayForecastComponent = () => {
       spacing={2}
       sx={{
         flex: 1,
-        overflowX: "scroll",
+        
       }}
     >
       <ForecastSection header="Seven Day Forecast" headerComponent="h4">
         <Stack
           direction={"row"}
           spacing={1}
-          sx={{ flexGrow: 1, justifyContent: "space-between", overflowX: 'scroll' }}
+          sx={{ flexGrow: 1, justifyContent: "space-between", overflowX: 'auto' }}
         >
           {loading
             ? Array.from({ length: 7 }, (x, index) => (

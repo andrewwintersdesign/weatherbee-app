@@ -2,13 +2,11 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
   selectCurrentLocation,
-  setCurrentLocation,
 } from "../../state/location/locationSlice";
 import { Location } from "../../model";
 import CurrentConditionsComponent from "./currentConditions/CurrentConditions";
 import {
   getWeatherForecast,
-  setStatus,
 } from "../../state/dailyForecast/dailyForecastSlice";
 import { Stack, Unstable_Grid2 as Grid } from "@mui/material/";
 import SevenDayForecastComponent from "./sevenDayForecast/SevenDayForecast";
@@ -25,9 +23,6 @@ const Weather = () => {
   
   useEffect(() => {
     document.title = `weatherbee`;
-    if (currentLocation.id === -1) {
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-    }
     if (currentLocation && currentLocation.id !== -1) {
       dispatch(
         getWeatherForecast({
@@ -36,41 +31,8 @@ const Weather = () => {
         })
       );
     }
-  },);
+  }, [currentLocation, dispatch]);
 
-  const successCallback = (position: GeolocationPosition) => {
-    dispatch(setStatus("loading"));
-    const location = {
-      id: 0,
-      name: 'Current Location',
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude,
-      elevation: position.coords.altitude || 0,
-      feature_code: "",
-      country_code: '',
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      population: 0,
-      country: '',
-    };
-    dispatch(setCurrentLocation(location));
-    
-  };
-
-  const errorCallback = (error: GeolocationPositionError) => {
-    const location: Location = {
-      id: -1,
-      name: "No Loction Selected",
-      latitude: 0,
-      longitude: 0,
-      elevation: 0,
-      feature_code: "",
-      country_code: "",
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      population: 0,
-      country: "",
-    };
-    dispatch(setCurrentLocation(location));
-  };
 
   return (
     <Grid

@@ -15,19 +15,61 @@ import {
   clearLocations,
 } from "../../state/location/locationSlice";
 import { Location } from "../../model";
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useEffect } from "react";
 import React from "react";
 import { close } from "../../state/mobileMenu/mobileMenuSlice";
 import { useAppDispatch } from "../../app/hooks";
+import { setStatus } from "../../state/dailyForecast/dailyForecastSlice";
 
 const LocationSearch = () => {
-  const [value] = React.useState<Location | undefined>(
+  const [value] = React.useState<Location>(
     useSelector(selectCurrentLocation)
   );
   const dispatch = useAppDispatch();
   const locationStatus = useSelector(selectLocationStatus);
   const loading = locationStatus === "loading";
   const locationOptions: Location[] = useSelector(selectLocations);
+
+  useEffect(() => {
+    if (value.id === -1) {
+      navigator.geolocation?.getCurrentPosition(successCallback, errorCallback);
+    }
+  }, [value.id])
+
+
+  const successCallback = (position: GeolocationPosition) => {
+    dispatch(setStatus("loading"));
+    const location = {
+      id: 0,
+      name: 'Current Location',
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+      elevation: position.coords.altitude || 0,
+      feature_code: "",
+      country_code: '',
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      population: 0,
+      country: '',
+    };
+    dispatch(setCurrentLocation(location));
+    
+  };
+
+  const errorCallback = (error: GeolocationPositionError) => {
+    const location: Location = {
+      id: -1,
+      name: "No Loction Selected",
+      latitude: 0,
+      longitude: 0,
+      elevation: 0,
+      feature_code: "",
+      country_code: "",
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      population: 0,
+      country: "",
+    };
+    dispatch(setCurrentLocation(location));
+  };
 
   let debounceTimeout: ReturnType<typeof setTimeout>;
 
@@ -62,7 +104,6 @@ const LocationSearch = () => {
       onChange={(event: SyntheticEvent, newValue: Location | string | null) => {
         const location = typeof newValue !== "string" ? newValue : undefined;
         if (location) {
-          debugger;
           dispatch(setCurrentLocation(location));
           dispatch(close());
         }
