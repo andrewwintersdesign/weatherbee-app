@@ -31,7 +31,7 @@ const LocationSearch = () => {
 
   let debounceTimeout: ReturnType<typeof setTimeout>;
 
-  const fetchLocations = (searchString: string | null) => {
+  const fetchLocations = (searchString: string) => {
     clearTimeout(debounceTimeout);
     dispatch(clearLocations());
     debounceTimeout = setTimeout(() => {
