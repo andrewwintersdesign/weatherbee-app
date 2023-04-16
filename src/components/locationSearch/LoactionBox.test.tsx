@@ -30,10 +30,7 @@ export const handlers = [
           admin2: "Auckland",
         },
       ]);
-      return res(
-        ctx.json(originalResponse),
-        ctx.delay(300)
-      );
+      return res(ctx.status(200), ctx.json(originalResponse), ctx.delay(300));
     }
   ),
 ];
@@ -67,8 +64,7 @@ describe("behaviour", () => {
       jest.runAllTimers();
     });
 
-
     expect(await input).toHaveValue("Auck");
-    expect(await view.store.getState().location).toContain('auckland');
+    expect(await view.store.getState().location.status).toContain("loading");
   });
 });

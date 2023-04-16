@@ -12,17 +12,16 @@ export interface LocationState {
 
 const initialState: LocationState = {
   currentLocation: {
-      id: -1,
-      name: 'No Loction Selected',
-      latitude: 0,
-      longitude: 0,
-      elevation:  0,
-      feature_code: "",
-      country_code: '',
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      population: 0,
-      country: '',
-    
+    id: -1,
+    name: "No Loction Selected",
+    latitude: 0,
+    longitude: 0,
+    elevation: 0,
+    feature_code: "",
+    country_code: "",
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    population: 0,
+    country: "",
   },
   locations: [],
   status: "idle",
@@ -32,8 +31,8 @@ const initialState: LocationState = {
 export const getLocations = createAsyncThunk(
   "location/getLocations",
   async (locationSearch: string) => {
-    const response = await fetchLocations(locationSearch)
-    
+    const response = await fetchLocations(locationSearch);
+
     return response.results;
   }
 );
@@ -43,32 +42,33 @@ export const locationSlice = createSlice({
   initialState,
   reducers: {
     setCurrentLocation: (state, action) => {
-        state.currentLocation = action.payload ;
-      },
-      clearLocations: (state) => {
-        state.locations = [] ;
-      },
+      state.currentLocation = action.payload;
+    },
+    clearLocations: (state) => {
+      state.locations = [];
+    },
   },
   extraReducers(builder) {
     builder
       .addCase(getLocations.pending, (state) => {
-        state.status = 'loading'
+        state.status = "loading";
       })
       .addCase(getLocations.fulfilled, (state, action) => {
-        state.status = 'succeeded'
+        state.status = "succeeded";
         state.locations = action.payload ? action.payload : [];
       })
       .addCase(getLocations.rejected, (state, action) => {
-        state.status = 'failed'
-        state.error = action.error.message || null
-      })
-  }
+        state.status = "failed";
+        state.error = action.error.message || null;
+      });
+  },
 });
 
 export const { setCurrentLocation, clearLocations } = locationSlice.actions;
 
 export const selectLocations = (state: RootState) => state.location.locations;
 export const selectLocationStatus = (state: RootState) => state.location.status;
-export const selectCurrentLocation = (state: RootState) => state.location.currentLocation;
+export const selectCurrentLocation = (state: RootState) =>
+  state.location.currentLocation;
 
 export default locationSlice.reducer;

@@ -62,6 +62,7 @@ const LocationSearch = () => {
       onChange={(event: SyntheticEvent, newValue: Location | string | null) => {
         const location = typeof newValue !== "string" ? newValue : undefined;
         if (location) {
+          debugger;
           dispatch(setCurrentLocation(location));
           dispatch(close());
         }
