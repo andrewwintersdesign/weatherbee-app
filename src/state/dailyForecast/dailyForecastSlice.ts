@@ -21,7 +21,7 @@ const initialState: DailyForecastState = {
   currentConditions: {
     temperature: 0,
     apparentTemperature: 0,
-    time: new Date().toISOString(),
+    time:  new Date(0).toISOString(),
     weatherCode: {
       image: "",
       summary: "",
