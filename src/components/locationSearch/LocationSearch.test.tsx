@@ -36,7 +36,8 @@ export const handlers = [
           },
         ];
       });
-      return res(ctx.status(200), ctx.json(originalResponse), ctx.delay(300));
+      return res(ctx.status(200), ctx.json(originalResponse), 
+      ctx.delay(300));
     }
   ),
 ];
