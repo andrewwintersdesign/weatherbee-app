@@ -1,5 +1,7 @@
 # weatherbee app
 
+This application is a work in progress. It consumes OpenMeteo open source weather API to display current conditions and 2 and 7 day forecasts
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
 
 ## Available Scripts
