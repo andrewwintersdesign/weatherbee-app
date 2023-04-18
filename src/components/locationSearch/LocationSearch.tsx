@@ -18,7 +18,7 @@ import { Location } from "../../model";
 import { SyntheticEvent, useEffect } from "react";
 import React from "react";
 import { close } from "../../state/mobileMenu/mobileMenuSlice";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch } from "../../state/hooks";
 import { setStatus } from "../../state/dailyForecast/dailyForecastSlice";
 
 const LocationSearch = () => {

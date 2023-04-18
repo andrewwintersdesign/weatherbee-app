@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
+import { RootState } from "../../state/store";
 import { FetchStatus, Location } from "../../model";
 import { fetchLocations } from "./locationAPI";
 

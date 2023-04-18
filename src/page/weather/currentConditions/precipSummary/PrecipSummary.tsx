@@ -10,7 +10,7 @@ import PrecipFill from "../../../../assets/icons/precip-fill-96.svg";
 import { LoadingBox } from "../../../../components/loadingBox";
 
 const PrecipSummary = () => {
-  const currentConditions: CurrentConditions | undefined = useSelector(
+  const currentConditions: CurrentConditions = useSelector(
     selectCurrentConditions
   );
 

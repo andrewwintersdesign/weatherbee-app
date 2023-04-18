@@ -5,7 +5,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import type { PreloadedState } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 
-import type { AppStore, RootState } from '../app/store'
+import type { AppStore, RootState } from '../state/store'
 // As a basic setup, import your same slice reducers
 import menuReducer from '../state/mobileMenu/mobileMenuSlice';
 import locationReducer from '../state/location/locationSlice';
